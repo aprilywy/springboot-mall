@@ -1,5 +1,6 @@
 package com.aprilyang.springbootmall.rowmapper;
 
+import com.aprilyang.springbootmall.constant.ProductCategory;
 import com.aprilyang.springbootmall.model.Product;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -14,7 +15,14 @@ public class ProductRowMapper implements RowMapper<Product> {
 
         product.setProductId(resultSet.getInt("product_id"));
         product.setProductName(resultSet.getString("product_name"));
-        product.setCategory(resultSet.getString("category"));
+
+        String categoryStr = resultSet.getString("category");
+        ProductCategory category = ProductCategory.valueOf(categoryStr);
+        product.setCategory(category);  //將資料庫的String類別轉成自定義類別
+
+//        product.setCategory(ProductCategory.valueOf(resultSet.getString("category")));  //將資料庫的String類別轉成自定義類別
+
+
         product.setImageUrl(resultSet.getString("image_url"));
         product.setPrice(resultSet.getInt("price"));
         product.setStock(resultSet.getInt("stock"));
