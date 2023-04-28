@@ -23,56 +23,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    
-    
-    /*
-     * 登入頁面、首頁
-     */
-    @GetMapping(value = {"/", "/index"})
-    public String index() {
-    	
-    	return "index";
-    }
-    
-    /*
-     * 判斷是否登入成功
-     */
-    @PostMapping("/index")
-    public String ckLogin(@RequestBody @Valid UserLoginRequest userLoginRequest, HttpSession session, Model model) {
-    	
-    	User user = userService.login(userLoginRequest);
-    	
-    	if(user != null) {
-    		session.setAttribute("loginUser", user);
-    		
-    		return "redirect:/product.html";
-    	} else {
-    		model.addAttribute("msg", "帳號密碼錯誤");
-    		
-    		return "index";
-    	}
-    	
-    }
-    
-    /*
-     * 登入後進入商品頁，攔截未登入用戶
-     */
-    @GetMapping("/product.html")
-    public String productPage(HttpSession session, Model model) {
-    	
-    	Object loginUser = session.getAttribute("loginUser");
-    	
-    	if(loginUser != null) {
-    		
-    		return "product";
-    	} else {
-    		model.addAttribute("msg", "尚未登入，請登入會員");
-    		
-    		return "index";
-    	}
-    	
-    	
-    }
 
     @PostMapping("/users/register")
     @ResponseBody

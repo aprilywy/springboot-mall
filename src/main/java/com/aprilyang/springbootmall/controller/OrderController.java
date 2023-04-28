@@ -24,23 +24,6 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-//    /*
-//     * 顯示購物車項目
-//     */
-//    @GetMapping("/users/{userId}/orders")
-//    public String cartItem() {
-//    	
-//    	return "cartItem";
-//    }
-//    
-//    /*
-//     * 顯示訂單頁面
-//     */
-//    @GetMapping("/users/{userId}/orders")
-//    public String order() {
-//    	
-//    	return "order";
-//    }
     
     @GetMapping("/users/{userId}/orders")
     @ResponseBody
